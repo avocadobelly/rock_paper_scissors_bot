@@ -18,11 +18,11 @@ class RandomBot:
             if opponents_previous_move == 'D':
                 self.opponent_dynamite_tracker()
             self.opponent_used_moves.append(opponents_previous_move)
-            # Only add water to available moves once opponent has used their first dynamite
+        # Only add water to available moves once opponent has used their first dynamite
         if self.opponents_used_dynamite == 1:
             self.available_moves.append('W')
 
-        #If opponent has used all thier dynamite, remove water from available moves
+        #If opponent has used all their dynamite, remove water from available moves
         if self.opponents_used_dynamite == 100 and 'W' in self.available_moves:
             self.available_moves.remove('W')
 
