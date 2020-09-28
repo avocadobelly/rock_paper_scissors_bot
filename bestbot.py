@@ -5,7 +5,6 @@ class MyBot:
     def __init__(self):
         self.available_moves = ['R', 'P', 'S', 'D']
         self.dynamite_supply = 100
-        # self.opponents_used_dynamite = 0
         self.opponent_used_moves = {}
         self.opponent_used_moves['R'] = 0
         self.opponent_used_moves['P'] = 0
@@ -20,6 +19,11 @@ class MyBot:
 
         if rounds:
             opponents_previous_move = rounds[- 1]['p2']
+            my_bot_previous_move = rounds[- 1]['p2']
+
+            if opponents_previous_move == my_bot_previous_move and self.dynamite_supply > 1:
+                self.use_dynamite()
+
             if opponents_previous_move == 'D':
                 self.opponent_used_moves['D'] += 1
 
@@ -34,10 +38,8 @@ class MyBot:
             choice = random.choice(self.available_moves)
             if choice == 'D':
                 self.dynamite_supply_tracker()
-
         else:
-            choice = 'D'
-            self.dynamite_supply_tracker()
+            choice = self.use_dynamite()
         return choice
 
     def dynamite_supply_tracker(self):
@@ -47,8 +49,9 @@ class MyBot:
             self.available_moves.remove('D')
         return self.available_moves
 
-    # def least_frequent_move(self, opponent_used_moves):
-    #     # sort opponents moves by ascending frequency:
-    #     opponent_moves = opponent_used_moves.items()
-    #
-    #     return least_frequent_move_made
+    def use_dynamite(self):
+        dynamite = 'D'
+        self.dynamite_supply_tracker()
+        return dynamite
+
+
