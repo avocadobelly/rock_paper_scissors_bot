@@ -22,7 +22,7 @@ class MyBot:
             if str(opponents_previous_move) == str(my_bot_previous_move) and self.dynamite_supply >= 1:
                 choice = self.use_dynamite()
             else:
-                choice = self.copy_opponents_most_frequent_move(most_frequent_move_by_opponent)
+                choice = self.counter_opponents_least_frequent_move(most_frequent_move_by_opponent)
         else:
             choice = self.use_dynamite()
         return choice
@@ -42,11 +42,11 @@ class MyBot:
 
     def sort_by_frequency(self, moves):
         used_moves = moves.items()
-        sorted_moves = sorted(used_moves, key= lambda item: item[1])
+        sorted_moves = sorted(used_moves,reverse=True, key=lambda item: item[1])
         most_frequent_move = sorted_moves[0]
         return most_frequent_move
 
-    def counter_opponents_most_frequent_move(self, opponent_move):
+    def counter_opponents_least_frequent_move(self, opponent_move):
         if opponent_move == 'R':
             my_move = 'P'
         elif opponent_move == 'P':
