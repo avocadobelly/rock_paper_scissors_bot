@@ -21,19 +21,19 @@ class MyBot:
             opponents_previous_move = rounds[- 1]['p2']
             my_bot_previous_move = rounds[- 1]['p2']
 
-            if opponents_previous_move == my_bot_previous_move and self.dynamite_supply > 1:
+            if str(opponents_previous_move) == str(my_bot_previous_move) and self.dynamite_supply > 1:
                 self.use_dynamite()
 
             if opponents_previous_move == 'D':
                 self.opponent_used_moves['D'] += 1
 
-            # Only add water to available moves once opponent has used their first dynamite
-            if self.opponent_used_moves['D'] == 20:
-                self.available_moves.append('W')
-
-            # If opponent has used all their dynamite, remove water from available moves
-            if self.opponent_used_moves['D'] == 50 and 'W' in self.available_moves:
-                self.available_moves.remove('W')
+            # # Only add water to available moves once opponent has used their first dynamite
+            # if self.opponent_used_moves['D'] == 20:
+            #     self.available_moves.append('W')
+            #
+            # # If opponent has used all their dynamite, remove water from available moves
+            # if self.opponent_used_moves['D'] == 50 and 'W' in self.available_moves:
+            #     self.available_moves.remove('W')
 
             choice = random.choice(self.available_moves)
             if choice == 'D':
