@@ -1,6 +1,6 @@
 import random
 
-class RandomBot:
+class MyBot:
     global random
     def __init__(self):
         self.available_moves = ['R', 'P', 'S', 'D']
@@ -23,18 +23,21 @@ class RandomBot:
             if opponents_previous_move == 'D':
                 self.opponent_used_moves['D'] += 1
 
-        # Only add water to available moves once opponent has used their first dynamite
-        if self.opponent_used_moves['D'] == 1:
-            self.available_moves.append('W')
+            # Only add water to available moves once opponent has used their first dynamite
+            if self.opponent_used_moves['D'] == 20:
+                self.available_moves.append('W')
 
-        # If opponent has used all their dynamite, remove water from available moves
-        if self.opponent_used_moves['D'] == 100 and 'W' in self.available_moves:
-            self.available_moves.remove('W')
+            # If opponent has used all their dynamite, remove water from available moves
+            if self.opponent_used_moves['D'] == 50 and 'W' in self.available_moves:
+                self.available_moves.remove('W')
 
-        choice = random.choice(self.available_moves)
-        if choice == 'D':
+            choice = random.choice(self.available_moves)
+            if choice == 'D':
+                self.dynamite_supply_tracker()
+
+        else:
+            choice = 'D'
             self.dynamite_supply_tracker()
-
         return choice
 
     def dynamite_supply_tracker(self):
@@ -43,10 +46,9 @@ class RandomBot:
         if self.dynamite_supply == 0:
             self.available_moves.remove('D')
         return self.available_moves
-    #
-    # def opponent_dynamite_tracker(self):
-    #     if self.opponents_used_dynamite < 100:
-    #         self.opponents_used_dynamite = self.opponents_used_dynamite + 1
 
-    def least_frequent_move(self):
-        str(self.opponent_used_moves)
+    # def least_frequent_move(self, opponent_used_moves):
+    #     # sort opponents moves by ascending frequency:
+    #     opponent_moves = opponent_used_moves.items()
+    #
+    #     return least_frequent_move_made
