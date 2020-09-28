@@ -13,7 +13,7 @@ class MyBot:
         rounds = gamestate['rounds']
         if rounds:
             opponents_previous_move = rounds[- 1]['p2']
-            my_bot_previous_move = rounds[- 1]['p2']
+            my_bot_previous_move = rounds[- 1]['p1']
 
             self.track_opponents_move(opponents_previous_move)
             opponent_moves_sorted = self.sort_by_frequency(self.opponent_used_moves)
