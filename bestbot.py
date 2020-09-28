@@ -3,7 +3,7 @@ import random
 class RandomBot:
     global random
     def __init__(self):
-        self.available_moves = ['R', 'P', 'S', 'W', 'D']
+        self.available_moves = ['R', 'P', 'S', 'D']
         self.dynamite_supply = 100
         self.opponents_used_dynamite = 0
         self.opponent_used_moves = []
@@ -18,6 +18,9 @@ class RandomBot:
             if opponents_previous_move == 'D':
                 self.opponent_dynamite_tracker()
             self.opponent_used_moves.append(opponents_previous_move)
+            # Only add water to available moves once opponent has used their first dynamite
+        if self.opponents_used_dynamite == 1:
+            self.available_moves.append('W')
 
         #If opponent has used all thier dynamite, remove water from available moves
         if self.opponents_used_dynamite == 100 and 'W' in self.available_moves:
