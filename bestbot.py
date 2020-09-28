@@ -1,5 +1,6 @@
 import random
 
+
 class MyBot:
     global random
 
@@ -14,10 +15,12 @@ class MyBot:
             opponents_previous_move = rounds[- 1]['p2']
             my_bot_previous_move = rounds[- 1]['p2']
 
+            # Add/update opponents last move in a dictionary:
+            self.track_opponents_move(opponents_previous_move)
+            # Sort the used moves dictionary by frequency of move:
+            self.sort_by_frequency(self.opponent_used_moves)
             if str(opponents_previous_move) == str(my_bot_previous_move) and self.dynamite_supply >= 1:
                 self.use_dynamite()
-
-            self.track_opponents_move(opponents_previous_move)
 
             choice = random.choice(self.available_moves)
         else:
@@ -36,3 +39,10 @@ class MyBot:
 
     def track_opponents_move(self, move):
         self.opponent_used_moves[move] += 1
+
+    def sort_by_frequency(self, moves):
+        used_moves = moves.items()
+        sorted_moves = sorted(used_moves, key= lambda item: item[1])
+        most_frequent_move = sorted_moves[0]
+        return most_frequent_move
+
