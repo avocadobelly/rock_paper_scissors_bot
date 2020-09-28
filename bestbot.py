@@ -18,11 +18,11 @@ class MyBot:
             # Add/update opponents last move in a dictionary:
             self.track_opponents_move(opponents_previous_move)
             # Sort the used moves dictionary by frequency of move:
-            self.sort_by_frequency(self.opponent_used_moves)
+            most_frequent_move_by_opponent = self.sort_by_frequency(self.opponent_used_moves)
             if str(opponents_previous_move) == str(my_bot_previous_move) and self.dynamite_supply >= 1:
-                self.use_dynamite()
-
-            choice = random.choice(self.available_moves)
+                choice = self.use_dynamite()
+            else:
+                choice = self.counter_opponents_most_frequent_move(most_frequent_move_by_opponent)
         else:
             choice = self.use_dynamite()
         return choice
@@ -46,3 +46,13 @@ class MyBot:
         most_frequent_move = sorted_moves[0]
         return most_frequent_move
 
+    def counter_opponents_most_frequent_move(self, opponent_move):
+        if opponent_move == 'R':
+            my_move = 'P'
+        elif opponent_move == 'P':
+            my_move = 'S'
+        elif opponent_move == 'S':
+            my_move = 'R'
+        else:
+            my_move = random.choice(self.available_moves)
+        return my_move
